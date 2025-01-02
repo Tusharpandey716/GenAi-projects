@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin: 5px 0 15px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #output {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        async function generateStory() {
+            const genre = document.getElementById("genre").value;
+            const prompt = document.getElementById("prompt").value;
+
+            try {
+                // Make a POST request to the Flask backend
+                const response = await fetch("http://127.0.0.1:5000/generate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ genre, prompt }),
+                });
+
+                // Parse the response
+                const result = await response.json();
+                document.getElementById("output").innerText = result.story || result.error;
+            } catch (error) {
+                document.getElementById("output").innerText = "Error: Unable to connect to the server.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Story Generator</h1>
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" placeholder="e.g., fantasy, mystery" />
+    <label for="prompt">Prompt:</label>
+    <textarea id="prompt" placeholder="Enter your story idea here"></textarea>
+    <button onclick="generateStory()">Generate Story</button>
+    <h2>Generated Story:</h2>
+    <div id="output"></div>
+</body>
+</html>
