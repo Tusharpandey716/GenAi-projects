@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Avatar Creator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        input, button { padding: 10px; margin: 10px; }
+        img { margin-top: 20px; width: 200px; height: 200px; border: 2px solid black; }
+    </style>
+</head>
+<body>
+    <h1>Custom Avatar Creator</h1>
+    <p>Describe your avatar:</p>
+    <input type="text" id="description" placeholder="e.g., a cartoon astronaut with sunglasses">
+    <button onclick="generateAvatar()">Generate Avatar</button>
+    <div id="result"></div>
+
+    <script>
+        async function generateAvatar() {
+            const description = document.getElementById('description').value;
+            const response = await fetch('http://127.0.0.1:5000/generate-avatar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ description })
+            });
+            const data = await response.json();
+            if (data.avatar_url) {
+                document.getElementById('result').innerHTML = `<img src="${data.avatar_url}" alt="Generated Avatar">`;
+            } else {
+                document.getElementById('result').innerHTML = `<p>Error: ${data.error}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
