@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Design Generator</title>
+    <script>
+        async function generateDesign() {
+            const description = document.getElementById("description").value;
+
+            const response = await fetch("http://127.0.0.1:5000/generate-design", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ description }),
+            });
+
+            const result = await response.json();
+            const outputDiv = document.getElementById("output");
+
+            if (result.design_url) {
+                outputDiv.innerHTML = `<img src="${result.design_url}" alt="Generated Design" width="300" />`;
+            } else {
+                outputDiv.innerText = result.error || "Something went wrong!";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Fashion Design Generator</h1>
+    <label for="description">Describe the fashion design:</label>
+    <textarea id="description" placeholder="e.g., a summer dress with floral patterns"></textarea>
+    <br>
+    <button onclick="generateDesign()">Generate Design</button>
+    <h2>Generated Design:</h2>
+    <div id="output"></div>
+</body>
+</html>
