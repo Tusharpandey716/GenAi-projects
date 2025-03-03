@@ -1,0 +1,101 @@
+/* General App Styling */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #004aad, #00d4ff);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Chat Container */
+.chat-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Title Styling */
+.chat-title {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #004aad;
+  margin-bottom: 20px;
+}
+
+/* Icons */
+.icon {
+  margin-right: 10px;
+  font-size: 28px;
+  color: #00a8ff;
+}
+
+/* Input Field */
+.chat-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* Button */
+.chat-button {
+  margin-top: 15px;
+  width: 100%;
+  background-color: #004aad;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-button:hover {
+  background-color: #00307a;
+}
+
+/* Bot Icon */
+.bot-icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Response Container */
+.response-container {
+  margin-top: 20px;
+}
+
+/* Loading Text */
+.loading {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+/* Response Box */
+.response-box {
+  background: #f0f8ff;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 5px solid #004aad;
+  text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .chat-container {
+      width: 95%;
+  }
+}
